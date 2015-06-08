@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/ocnc.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,30 +41,37 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h1>OCNC Python Tutorial</h1>
+					<h3>Romain Caze &amp; Tom Close</h3>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+					<h2>What is Python?</h2>
+					<p>Flexible, object-oriented scripting language</p>
+					<ul>
+						<li>Easy to learn</li>
+						<li>Fast to write/debug</li>						
+						<li>Interactive (if you like)</li>
+						<li>Portable between every major OS</li>
+						<li>A little slow (if not written carefully)</li>						
+						<li>Supported by many 3rd party modules</li>
+					</ul>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+						<h2>What can you do with Python?</h2>
+						<ul>
+							<li>Automate repetitive tasks (e.g. renaming files)</li>
+							<li>Run neural simulations (NEURON, NEST, Brian, etc...)</li>
+							<li>Numerical analysis (NumPy, SciPy)</li>
+							<li>Symbolic algebra (SymPy, Sage)</li>
+							<li>Visualise data (MatPlotLib, VisPy)</li>
+							<li>Distrbute programs over HPC clusters (mpi4py)</li>
+							<li>Much more...</li>
+						</ul>
+						
 					</section>
 					<section>
 						<h2>Basement Level 1</h2>
@@ -79,6 +86,331 @@
 						</a>
 					</section>
 				</section>
+
+		<section>
+            <h1>Say hello</h1>
+            <h3 id="interactively">... interactively</h3>
+            <pre><code>$ python
+Python 2.7.2 (default, Oct 11 2012, 20:14:37) 
+[GCC 4.2.1 Compatible Apple Clang 4.0 (tags/Apple/clang-418.0.60)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print 'Hello, Python!'
+Hello, Python!</code></pre>
+            <h3 id="or-via-a-script">... or via a script</h3>
+            <p><code>hello_python.py</code>:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">#!/usr/bin/env python
+
+print 'Hello, Python!'  # Say hello to my friend!</code></pre>
+            <p>Run this script as</p>
+            <pre><code>$ python hello_python.py 
+Hello, Python!</code></pre>
+        </section>
+        <section>
+            <h1>Variables</h1>
+            <p>Python is a dynamic language and any variable can be created and assigned without
+                declaration.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a = 2    # define a
+b = a
+a *= b   # a==???
+b = 'now for something completely different.'
+a *= b   # a==???
+del(a, b)</code></pre>
+            <h3 id="beware-of-types">Beware of types!</h3>
+            <pre class="sourceCode python"><code class="sourceCode python">a, b = 1, 2
+print a, b, a/b
+print a/float(b)</code></pre>
+        </section>
+        <section>
+            <h1>Indents</h1>
+            <p>Code blocks are defined by the fixed indents followed by <strong>:</strong>. For
+                example, indent the codes in conditionals,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">if True:
+    print "True"
+    print "To be precise, that was True"
+else:
+    print "False"</code></pre>
+            <p>in loops,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">for x in range(6):
+    print x</code></pre>
+            <p>or when you define functions</p>
+            <pre class="sourceCode python"><code class="sourceCode python">def f(x):
+    y = x + 1
+    return y</code></pre>
+        </section>
+        <section>
+            <h1>Controlling the flow</h1>
+            <p>With <code>if ... else ...</code>, use <code>and</code>, <code>or</code>, and
+                    <code>not</code>:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">simulator = "Nest"
+language = "Python"
+
+if simulator=="Nest" and language=="Python":
+    print "A Nest simulation written in Python."
+
+if simulator!="Nest":
+    print "Not a Nest simulation."
+
+if not language=="Python":
+    print "Not written in Python."</code></pre>
+            <p>You can make loops with <code>for</code> or <code>while</code>.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">j = 0
+for i in range(10):
+    j += i
+    print i, j</code></pre>
+        </section>
+        <section>
+            <h1>Functions</h1>
+            <pre class="sourceCode python"><code class="sourceCode python">def f(x, y):
+    return x</code></pre>
+            <p>Then, try (one of them causes an error!)</p>
+            <pre class="sourceCode python"><code class="sourceCode python">f(1, 2)
+f(x=1, y=2)
+f(y=2, x=1)
+f(x=2, 2)</code></pre>
+            <p>The default values can be also specified:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">def f(x, y=2):
+    return x+y</code></pre>
+            <p>Try</p>
+            <pre class="sourceCode python"><code class="sourceCode python">f(1)
+f(1, y=3)</code></pre>
+            <p>The functions can be called with data structures such as lists and dictionaries.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">f(*[1, 2])
+f(**{'x': 1, 'y': 7})</code></pre>
+        </section>
+        <section>
+            <h3 id="help-strings">Help strings</h3>
+            <pre class="sourceCode python"><code class="sourceCode python">def f(x, y):
+   """ f(x, y) returns the sum of x and y."""
+   return x+y</code></pre>
+            <p>Then, try</p>
+            <pre class="sourceCode python"><code class="sourceCode python">help(f)</code></pre>
+            <p>Try also other functions that we have seen such as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">help(range)</code></pre>
+            <p>and</p>
+            <pre class="sourceCode python"><code class="sourceCode python">help('in')</code></pre>
+        </section>
+        <section>
+            <h1>Oranizing functions in files</h1>
+            <p>In Python, every file is considered as a <em>module</em> with its own namespace. For
+                example, let's say you have <code>mymodule.py</code> as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">"""
+Here you write a module help. Try help(mymodule) after importing.
+"""
+
+def func1():
+    """ Help for func1. """
+    print "You called func1!"</code></pre>
+            <p>You can call <code>func1</code> as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">import mymodule
+mymodule.func1()</code></pre>
+            <p>or with an alias,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">import mymodule as m
+m.func1()</code></pre>
+            <p>or import the function directly first</p>
+            <pre class="sourceCode python"><code class="sourceCode python">from mymodule import func1
+func1()</code></pre>
+            <p>But use the following method <strong>only when you know what you are
+                doing!</strong></p>
+            <pre class="sourceCode python"><code class="sourceCode python">from mymodule import *
+func1()</code></pre>
+        </section>
+        <section>
+            <p>A directory can be a module too if it has <code>__init__.py</code>. Typically, you
+                have:</p>
+            <p><code>mymodule/__init__.py</code></p>
+            <pre class="sourceCode python"><code class="sourceCode python">"""
+Module help
+"""
+
+import submodule1</code></pre>
+            <p><code>mymodule/submodule1.py</code></p>
+            <pre class="sourceCode python"><code class="sourceCode python">"""
+Submodule help
+"""
+
+def func1():...</code></pre>
+            <p>Then, <code>func1</code> can be called as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">import mymodule
+
+mymodule.submodule1.func1()</code></pre>
+            <p>Or you can use aliasing, too.</p>
+        </section>
+        <section>
+            <h1>Lists</h1>
+            <pre class="sourceCode python"><code class="sourceCode python">a = range(6)              # a ==?
+3 in a                    # Test if it has a particular element.
+for x in a: print x**2,   # Loop around elements in the list.</code></pre>
+            <p>The elements can be accessed via indices:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a[3]
+a[1:5]    # Access a range of elements.
+a[-1]     # You can also index from the end.</code></pre>
+            <p>Lists are mutable.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a.append(6)     # You can append elements...
+a.append('J')   # of different types...
+a.remove(3)     # and remove them, too.</code></pre>
+        </section>
+        <section>
+            <h2 id="mutating-objects-and-python-oddities">Mutating objects and Python oddities</h2>
+            <p>Python <em>variables</em> are actually labels on the underlying data. This sometimes
+                leads to confusing behaviors. For example,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">b = a
+a.append(2)  # Now b == ???</code></pre>
+            <p>If this causes a problem, you need to use <strong>deep copying</strong>:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">import copy
+b = copy.deepcopy(a)
+a.append(3) # b==???</code></pre>
+        </section>
+        <section>
+            <h1>Tuples</h1>
+            <p>The tuple is similar to the list but is immutable.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a = (1, 2)
+3 in a       # Test if it has the particular element.</code></pre>
+            <p>You can also access elements with indices:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a = tuple(range(6))   # Cast a list into a tuple
+a[1:5]
+a[-1]     # You can also index from the end.</code></pre>
+        </section>
+        <section>
+            <p>Note in many cases the parenthese are not necessary to define a tuple. Try the
+                following examples and see what happens:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">a = 1, 2     # a == ???
+a, b = 1, 2  # a == ??? We have seen this before.</code></pre>
+            <p>The last expression can be conveniently used in many occasions:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">data = [('Purkinje', 'inhibitory'), ('Granule', 'excitatory')]
+for name, exc_inh in data:
+    print name, 'neurons are', exc_inh</code></pre>
+            <p>Also the tuple is useful when a function needs to return multiple values:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">def f():
+    return 1, 2
+
+x = f()     # x==???
+x, y = f()  # x==???</code></pre>
+        </section>
+        <section>
+            <h1>Dictionaries</h1>
+            <p>The dictionary is a convenient data structure providing key/value access.</p>
+            <pre class="sourceCode python"><code class="sourceCode python">p = {'type': 'pyr', 'rate': 1.0, 'number': 1000}
+p['type']
+'type' in p    # Check if the dict has a particular **key**</code></pre>
+            <p>This is very useful if you have lots of data:</p>
+            <pre class="sourceCode python"><code class="sourceCode python">cells = []
+cells.append({'type': 'pyr', 'rate': 1.0, 'number': 1000})
+cells.append({'type': 'inh_PV', 'rate': 10.0, 'number': 150})
+cells.append({'type': 'inh_SOM', 'rate': 1.0, 'number': 50})
+slow_cells = [c for c in cells if c['rate']&lt;5.0]  # List comprehension.
+for c in slow_cells:
+    print c['type']</code></pre>
+        </section>
+        <section>
+            <h1>Strings</h1>
+            <p>Python provides <em>tons</em> of functions to manipulate strings. For example,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">'B' + 'A' + 'M'
+' '.join(['B','A','M'])
+'cell 10 0.01'.split(' ')
+'Okinawa eh yokoso.'.replace('yokoso','mensore')</code></pre>
+            <p>There is the <code>printf</code>-style string replacement,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">'Cell type: %s  Number:%d  Firing rate:%f' % ('pyr',1000,1.0)</code></pre>
+            <p>With the data in the dictionary,</p>
+            <pre class="sourceCode python"><code class="sourceCode python">cells = []
+cells.append({'type': 'pyr', 'rate': 1.0, 'number': 1000})
+'%(number)d %(type)s cells fire with rate:%(rate)f Hz.' % cells[0]</code></pre>
+        </section>
+        <section>
+            <h1>Classes and objects</h1>
+            <p>The classes are defined as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">class Cell(object):
+    """ Class help """
+    def __init__(self, cell_type):
+        self.cell_type = cell_type
+        
+    def add_patch_electrode(self, location):
+        raise NotImplementedError('This part is not implemented yet.')</code></pre>
+            <p>(Note <strong><code>self</code></strong> in the method definitions)</p>
+            <p>and you can make objects of the class as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">c = Cell(cell_type='pyr')
+c.cell_type                    # Call attributes.
+c.add_patch_electrode('soma')  # Call methods.</code></pre>
+        </section>
+        <section>
+            <p>You can also subclass other classes as</p>
+            <pre class="sourceCode python"><code class="sourceCode python">class CellList(list):
+    """ Need help """
+    def __init__(self):
+        self.size = len(self)
+    
+    def append(self, cell):
+        super(CellList, self).append(cell)
+        print "You just added a ", cell.cell_type, "in this list."
+        self.size += 1
+        print "The number of cells is now", self.size</code></pre>
+            <pre class="sourceCode python"><code class="sourceCode python">l = CellList()
+l.append(c)</code></pre>
+        </section>
+        <section>
+            <h2 id="beware-when-you-need-to-create-many-many-custom-objects">Beware when you need to
+                create many many custom objects!</h2>
+            <p>Python objects are dynamic, which makes them very easy to use, but are not optimzed
+                for memory efficiency. Creating many (thousands, millions,...) of them often can
+                make this problem serious (by blowing up your RAM). The solution is to fix the list
+                of attributes by</p>
+            <ul>
+                <li>using <code>__slots__</code> (ask google if you want to know more)</li>
+                <li>subclassing <code>namedtuple</code> (again ask google)</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Reading and writing files</h1>
+            <pre class="sourceCode python"><code class="sourceCode python">f = open('example.dat', 'r+')   # open a file
+a = f.read()
+new_a = article.replace('butt', 'ass')
+f.write(new_a)
+f.close()                       # and close it.</code></pre>
+            <p><strong>Mode strings</strong></p>
+            <ul>
+                <li>'r' : reading only</li>
+                <li>'w' : writing (an existing file will be erased)</li>
+                <li>'r+' : reading and writing</li>
+                <li>'a' : appending</li>
+                <li>Nothing: the same as 'r'</li>
+            </ul>
+        </section>
+        <section>
+            <h3 id="pickling-objects">Pickling objects</h3>
+            <pre class="sourceCode python"><code class="sourceCode python">import pickle
+x = {'cells': ['exc', 'inh']}
+f = open('temp.dat', 'w')
+pickle.dump(x, f)
+f.close()</code></pre>
+            <pre><code>f = open('temp.dat')
+x = pickle.load(f)
+f.close()</code></pre>
+        </section>
+        <section>
+            <h1>Installing packages</h1>
+            <p>In <strong>most</strong> cases when you need to install a Python package,
+                    <code>pip</code> is your friend. Download the setup file for
+                    <code>distribute</code> and <code>pip</code> from</p>
+            <ul>
+                <li><a href="http://python-distribute.org/distribute_setup.py"
+                        >http://python-distribute.org/distribute_setup.py</a></li>
+                <li><a href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py"
+                        >https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a></li>
+            </ul>
+            <p>and run</p>
+            <pre class="sourceCode bash"><code class="sourceCode bash">$ python distribute_setup.py
+$ python get-pip.py</code></pre>
+            <p>Then try</p>
+            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install virtualenv</code></pre>
+            <p>which will install a package <code>virtualenv</code>.</p>
+        </section>
+        <section>
+            <h1>For more information</h1>
+            <ul>
+                <li>python_tutorial.pdf</li>
+                <li><a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html"
+                            ><strong>Code like a Pythonista</strong></a></li>
+            </ul>
+        </section>
 
 				<section>
 					<h2>Slides</h2>
