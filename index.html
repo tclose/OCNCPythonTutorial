@@ -172,7 +172,7 @@ print an_array[2, :]  # access a row
 print an_array[:, 1]  # access a column</code></pre>
 				</section>
 				<section>
-					<h2>Modifying containers</h2>
+					<h1>Modifying containers</h1>
 					<p>Lists and dictionaries can be modified (not tuples)</p>
 					<pre><code class="sourceCode python">a_list = [1, 2, 3, 4, 5]
 a_list[2] = 10
@@ -189,49 +189,42 @@ print a_list</code></pre>
 					<pre><code class="sourceCode python">import copy
 b = copy.copy(a)
 a.append(3) # b==???</code></pre>
-				</section>				
-        <section>
-            <h1>'If' statement</h1>
-            <p>With <code>if ... else ...</code>, use <code>and</code>, <code>or</code>, and
-                    <code>not</code>:</p>
-            <pre><code class="sourceCode python">simulator = "Nest"
-language = "Python"
-
-if simulator=="Nest" and language=="Python":
-    print "A Nest simulation written in Python."
-
-if simulator!="Nest":
-    print "Not a Nest simulation."
-
-if not language=="Python":
-    print "Not written in Python."</code></pre>
-        	<p>You can make loops with <code>for</code> or <code>while</code>.</p>
-            <pre><code class="sourceCode python">j = 0
-for i in range(10):  # range produces a list from 0 to arg - 1
-    j += i
-    print 'i={}, j={}'.format(i, j)</code></pre>
-        </section>
+				</section>
 				<section>
-					<h1>Indents</h1>
-					<p>Code blocks are defined by the fixed indents followed by '<strong>:</strong>'<br/> For
-						example, indent the codes in conditionals,</p>
-					<pre><code class="sourceCode python">if True:
-    print "True"
-    print "To be precise, that was True"
-else:
-    print "False"</code></pre>
-					<p>in loops,</p>
-					<pre><code class="sourceCode python">while alive:
-    print 'gambate!'</code></pre>
-					<p>or when you define functions</p>
-					<pre><code class="sourceCode python">def f(x):
-    y = x + 1
-    return y</code></pre>
+					<h1>Iterate over containers</h1>
+					<p>Use 'for' statements to iterate over elements of a container .</p>
+					<pre><code class="sourceCode python">for &lt;element&gt; in &lt;container&gt;:
+    &lt;do-statement&gt;
+    &lt;do-another-statement&gt;
+    ...</code></pre>
+					<p>For example...</p>					
+					<pre><code class="sourceCode python">a_list = [1, 2, 3, 4, 5]
+for element in a_list:
+    print 10 ** element</code></pre>
+					<p>NB: unlike other languages <strong>indentation</strong> matters in Python</p>					
 				</section>				
+				<section>
+					<h1>Making decisions</h1>
+					<p>Make decisions on what to do with 'if' statements.</p>
+					<pre><code class="sourceCode python">if &lt;condition&gt;:
+    &lt;statement&gt;
+elif &lt;condition&gt;:
+    &lt;statement&gt;
+else:
+    &lt;statement&gt;</code></pre>
+					<p>Example:</p>
+					<pre><code class="sourceCode python">a_list = [1, 2, 3, 4, 5]
+for element in a_list:
+    if element == 4: 
+    	print 'skip'
+    else:
+        print 10 ** element</code></pre>
+				</section>
         <section>
             <h1>Functions</h1>
+        	<p>Avoid writing the same code multiple times with functions</p>
             <pre><code class="sourceCode python">def f(x, y):
-    return x</code></pre>
+    return x ** 25 / y</code></pre>
             <p>Then, try (one of them causes an error!)</p>
             <pre><code class="sourceCode python">f(1, 2)
 f(x=1, y=2)
@@ -244,12 +237,10 @@ f(x=2, 2)</code></pre>
             <pre><code class="sourceCode python"  data-trim contenteditable>
 f(1)  # No default values
 f(1, y=3)  # With default values
-f(*[1, 3]) # From a list using '*'
-f(**{'x': 1, 'y': 3})  # From a dictionary using '**'
  			</code></pre>
         </section>
         <section>
-            <h3 id="help-strings">Help strings</h3>
+            <h1>Help strings</h1>
             <pre><code class="sourceCode python">def func(x, y):
    """ func(x, y) returns the sum of x and y."""
    return x+y</code></pre>
@@ -265,9 +256,9 @@ f(**{'x': 1, 'y': 3})  # From a dictionary using '**'
 		<section>
 			<h1>Returning tuples</h1>
 			<p>If you want to return multiple values us a tuple</p>
-			<pre><code class="sourceCode python">def integer_division(number, divisor):
-    divided = number // divisor
-    remainder = number % divisor
+			<pre><code class="sourceCode python">def integer_division(numerator, denominator):
+    divided = numerator // denominator
+    remainder = numerator % denominator
     return divided, remainder  # you can drop the parenthesis</code></pre>
 			<p>Receiving tuples</p>
 			<pre><code class="sourceCode python">result = integer_division(15, 6)
@@ -293,24 +284,6 @@ m.func1()</code></pre>
             <pre><code class="sourceCode python">from mymodule import func1
 func1()</code></pre>
         </section>
-        <section>
-            <p>A directory can be a module too if it has <code>__init__.py</code></p>
-            <p><code>mymodule/__init__.py</code></p>
-            <pre><code class="sourceCode python">"""
-Module help
-"""
-import submodule1</code></pre>
-            <p><code>mymodule/submodule1.py</code></p>
-            <pre><code class="sourceCode python">"""
-Submodule help
-"""
-def func1():...</code></pre>
-            <p>Then, <code>func1</code> can be called as</p>
-            <pre><code class="sourceCode python">import mymodule.submodule1
-
-mymodule.submodule1.func1()</code></pre>
-        </section>
-       
         <section>
             <h1>Classes and objects</h1>
             <p>The classes are defined as</p>
