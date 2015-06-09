@@ -268,27 +268,44 @@ Implicitly unpacking is more convenient
 <pre><code class="sourceCode python">divided, remainder = integer_division(15, 6)  # More convenient</code></pre>
 		</section>
 		<section>
-            <h1>Modules</h1>
-            <p>In Python, every file is as a <em>module</em> with its own namespace.
-            	<p>For example, let's say you have <code>mymodule.py</code> as</p>
-            <pre><code class="sourceCode python">"""Here you write a module help. Try help(mymodule) after import."""
+			<h1>Installing modules</h1>
+			<p>In <strong>most</strong> cases when you need to install a Python module or package, use <code>pip</code>...
+				<pre class="sourceCode bash"><code class="sourceCode bash">$ pip install sympy</code></pre>
+				<p>which will install the <code>sympy</code> package, or</p>
+				<pre class="sourceCode bash"><code class="sourceCode bash">$ pip install neo</code></pre>
+				<p>which will install the <code>neo</code> package.</p>
+		</section>
+		<section>
+            <h1>Importing modules</h1>
+            Use the 'import' statement to import modules/packages 
+            <pre><code class="sourceCode python">import numpy
+print help(numpy.array)</code></pre>       	
+			<p>To use a different name for the module in your file</p>
+			<pre><code class="sourceCode python">import numpy as np
+print help(np.array)</code></pre>
+            <p>To only import specific functions from a module</p>
+            <pre><code class="sourceCode python">from numpy import array, ones
+help(array)</code></pre>
+			<p>To import a submodule use '.'</p>
+			<pre><code class="sourceCode python">import numpy.random
+help(numpy.random.randn)</code></pre>
+        </section>
+		<section>
+			<h1>Your modules</h1>
+			<p>In Python, every file is as a <em>module</em>. For example, let's say you have a file called <code>mymodule.py</code> 				<pre><code class="sourceCode python">"""Here you write a module help. Try help(mymodule) after import."""
 def func1():
     print "You called func1!"</code></pre>
-            <p>You can call <code>func1</code> as</p>
-            <pre><code class="sourceCode python">import mymodule
-mymodule.func1()</code></pre>
-            <p>or with an alias,</p>
-            <pre><code class="sourceCode python">import mymodule as m
-m.func1()</code></pre>
-            <p>or import the function directly first</p>
-            <pre><code class="sourceCode python">from mymodule import func1
+				<p>it can be imported just like builtin modules</p>
+				<pre><code class="sourceCode python">import mymodule
+from mymodule import func1
 func1()</code></pre>
-        </section>
+		</section>			
         <section>
             <h1>Classes and objects</h1>
-            <p>The classes are defined as</p>
+            <p>Custom classes of objects are defined like so</p>
             <pre><code class="sourceCode python">class Cell(object):
     """A very simple cell model"""
+
     def __init__(self, cell_type):
         self.cell_type = cell_type
         self._patch_clamps = []
@@ -306,33 +323,6 @@ c.add_patch_electrode('soma')  # Call methods.
 c.add_patch_electrode('spiny_dendrite')
 print c.list_patches()</code></pre>
         </section>
-        <!--<section>
-            <p>You can also subclass other classes as</p>
-            <pre><code class="sourceCode python">class CellList(list):
-    """ Need help """
-    def __init__(self):
-        self.size = len(self)
-    
-    def append(self, cell):
-        super(CellList, self).append(cell)
-        print "You just added a ", cell.cell_type, "in this list."
-        self.size += 1
-        print "The number of cells is now", self.size</code></pre>
-            <pre><code class="sourceCode python">l = CellList()
-l.append(c)</code></pre>
-        </section>-->
-        <!--<section>
-            <h2 id="beware-when-you-need-to-create-many-many-custom-objects">Beware when you need to
-                create many many custom objects!</h2>
-            <p>Python objects are dynamic, which makes them very easy to use, but are not optimzed
-                for memory efficiency. Creating many (thousands, millions,...) of them often can
-                make this problem serious (by blowing up your RAM). The solution is to fix the list
-                of attributes by</p>
-            <ul>
-                <li>using <code>__slots__</code> (ask google if you want to know more)</li>
-                <li>subclassing <code>namedtuple</code> (again ask google)</li>
-            </ul>
-        </section>-->
         <section>
             <h1>Read/write to file</h1>
             <pre><code class="sourceCode python">with open('example.dat', 'r+') as f: # open a file 'f'
@@ -345,14 +335,6 @@ l.append(c)</code></pre>
                 <li>'w' : writing (an existing file will be erased)</li>
                 <li>'r+' : read and writing</li>
             </ul>
-        </section>
-        <section>
-            <h1>Installing packages</h1>
-            <p>In <strong>most</strong> cases when you need to install a Python package, use <code>pip</code>...
-            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install sympy</code></pre>
-            <p>which will install the <code>sympy</code> package, or</p>
-            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install neo</code></pre>
-            <p>which will install the <code>neo</code> package.</p>
         </section>
         <section>
             <h1>More information</h1>
