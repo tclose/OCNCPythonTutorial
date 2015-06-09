@@ -52,13 +52,7 @@
 						<li>Easy to learn</li>
 						<li>Fast to write/debug</li>						
 						<li>Interactive (if you like)</li>
-						<li>Portable between every major OS</li>
 						<li>Supported by many 3rd party modules</li>
-						<li>A little slow (if you are not careful)
-							<ul>
-								<li>Translated to C code</li>
-							</ul>
-						</li>
 					</ul>
 				</section>
 
@@ -108,56 +102,96 @@ print 'Hello, Python!'  # Say hello to my friend!</code></pre>
             <pre><code>$ python hello_python.py 
 Hello, Python!</code></pre>
 		        </section>
-		        <section>
-		            <h1>Variables</h1>
-		            <p>Python is a "dynamic language",<br/>(i.e. any variable can be created at any time)</p>
-		            <pre><code class="sourceCode python">a = 2    # define a
-b = a
-a *= b   # a==???
-b = 'now for something completely different.'
-a *= b   # a==???
-del(a, b)</code></pre>
-		            <h3 id="beware-of-types">Beware of types!</h3>
-		            <pre><code class="sourceCode python">a, b = 1, 2
-print a, b, a/b
-print a/float(b)</code></pre>
-		        </section>
 				<section>
-					<h1>Floats and Integers</h1>
+					<h1>Basic types</h1>
+					<pre><code class="sourceCode python">a = 1  # integer (int)
+b = 2.0  # floating point number (float)
+c = True  # boolean value True/False (bool) 
+d = "Hello OCNC students!"  # "string" of characters, i.e. text (str)
+e = 'Hello "the best year" of OCNC students!'  # another string
+</code></pre>
+				<p>Python is a "dynamic language",<br/>(i.e. any variable can be created at any time)</p>
+					<p>To see the value of a variable use "print"</p>
+					<pre><code class="sourceCode python">print a</code></pre>
 				</section>
-		<section>
-			<h1>Strings</h1>
-			<p>Python provides <em>tons</em> of functions to manipulate strings. For example,</p>
-			<pre><code class="sourceCode python">'B' + 'A' + 'M'
-' '.join(['B','A','M'])
-'cell 10 0.01'.split(' ')
-'Okinawa eh yokoso.'.replace('yokoso','mensore')</code></pre>
-			<p>There is the <code>printf</code>-style string replacement,</p>
-			<pre><code class="sourceCode python">'Cell type: %s  Number:%d  Firing rate:%f' % ('pyr',1000,1.0)</code></pre>
-			<p>With the data in the dictionary,</p>
-			<pre><code class="sourceCode python">cells = []
-cells.append({'type': 'pyr', 'rate': 1.0, 'number': 1000})
-'%(number)d %(type)s cells fire with rate:%(rate)f Hz.' % cells[0]</code></pre>
-		</section>				
+				<section>
+					<h1>Basic operators</h1>
+					<p>+, -, *, /, //, **, %, ==, &lt;, &gt;, &lt;=, &gt;=, !=, and, or, not</p>
+					<p>Variables are combined with "operators" as it makes sense</p>
+					<pre><code class="sourceCode python">print a + b
+print 2 * a == b
+print a / b
+print a &lt; b and (a / b + 0.5) &gt; a
+print a / 2  # extra points if you can explain what happens here!</code></pre>
+					<p>The type of the operation depends on the type</p>
+					<pre><code class="sourceCode python">print 'OCNC' + '2015'</code></pre>					
+				</section>
+				<section>
+					<h1>Basic containers</h1>
+					<p>Python has several convenient containers</p>
+					<pre><code class="sourceCode python">a_tuple = (1, 2, 3)  # tuples (single, double, triple, etc...)
+a_list = [1, 2, 3]  # lists (same as tuples but can change length)
+a_dict = {'first':1, 'second':2, 'third':3}  # a dictionary</code></pre>
+					<p>They can contain any type including other containers</p>
+					<pre><code class="sourceCode python">a_nested_list = [[1, 2], [1, 2, 3], [1]]  #  nested lists
+a_nested_dict = {'foo': [1, 2, 3],
+                 'bar': {42:'meaning of life', 1:'the loneliest'},
+                 'abc': 'its easy as'}  # nested dictionary/list</code></pre>
+				</section>
+				<section>
+					<h1>Numpy arrays</h1>
+					<p>Like a list/tuple but much faster</p>
+					<pre><code class="sourceCode python">import numpy as np  # We'll come back to this
+an_array = np.array([1, 2, 3, 4, 5])
+another_array = np.ones(5)
+yet_another_array = np.ones(6)</code></pre>
+					<p>Element-wise arithmetic between arrays of same length</p>
+					<pre><code class="sourceCode python">print an_array + another_array  # add element-wise
+print an_array - another_array  # subtract element-wise
+print an_array + yet_another_array  # Error!! lengths don't match</code></pre>
+					<p>Multi-dimensional, not nested</p>
+					<pre><code class="sourceCode python">two_d = np.array([[1, 2], [3, 4]])  # works fine
+two_d = np.array([[1, 2], [3, 4, 5]])  # Error!! Dims. not consistent </code></pre>
+				</section>
+				<section>
+					<h1>Accessing containers</h1>
+					<p>Tuples, Lists and 1-D Numpy arrays</p>
+					<pre><code class="sourceCode python">a_list = [1, 2, 3, 4, 5]  # or (1, 2, 3, 4, 5) for tuple
+print a_list[0]  # note! indexing starts from 0 (not 1 as in MATLAB)
+print a[1:5]    # access a range of elements.
+print a[-1]     # you can also index from the end
+print a[0:4:2]  # every second element
+print 3 in a  # test if it has a particular element.</code></pre>
+					<p>Dictionaries</p>
+					<pre><code class="sourceCode python">a_dict = {'1st':10, '2nd':100, '3rd':1000}
+print a_dict['2nd']  # useful for mapping values to strings</code></pre>
+					<p>Multi-dimension Numpy arrays</p>
+					<pre><code class="sourceCode python">an_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print an_array[1, 2]  # access a single element
+print an_array[2, :]  # access a row
+print an_array[:, 1]  # access a column</code></pre>
+				</section>
+				<section>
+					<h2>Modifying containers</h2>
+					<p>Lists and dictionaries can be modified (not tuples)</p>
+					<pre><code class="sourceCode python">a_list = [1, 2, 3, 4, 5]
+a_list[2] = 10
+a_list[9] = 20  # Error! List is shorted than 10
+a_list.append(30)  # Also try 'remove', 'pop' and 'extend'
+a_dict = {'1st':10, '2nd':100, '3rd':1000}
+a_dict['1st'] = 20  # replaces value for '1st'
+a_dict['4th'] = 10000  # works fine, new value is inserted</code></pre>
+					<p>But be careful, for efficient memory usage and speed Python <em>variables</em> are actually labels on the underlying data!</p>
+					<pre><code class="sourceCode python">another_list = a_list  # or so we may think...
+another_list.append(2)  #  Warning! this may not be what you intend
+print a_list</code></pre>
+					<p>If this causes a problem, you need to use <strong>copy</strong> or <strong>deepcopy</strong>:</p>
+					<pre><code class="sourceCode python">import copy
+b = copy.copy(a)
+a.append(3) # b==???</code></pre>
+				</section>				
         <section>
-            <h1>Indents</h1>
-            <p>Code blocks are defined by the fixed indents followed by <strong>:</strong>. For
-                example, indent the codes in conditionals,</p>
-            <pre><code class="sourceCode python">if True:
-    print "True"
-    print "To be precise, that was True"
-else:
-    print "False"</code></pre>
-            <p>in loops,</p>
-            <pre><code class="sourceCode python">for x in range(6):
-    print x</code></pre>
-            <p>or when you define functions</p>
-            <pre><code class="sourceCode python">def f(x):
-    y = x + 1
-    return y</code></pre>
-        </section>
-        <section>
-            <h1>Controlling the flow</h1>
+            <h1>'If' statement</h1>
             <p>With <code>if ... else ...</code>, use <code>and</code>, <code>or</code>, and
                     <code>not</code>:</p>
             <pre><code class="sourceCode python">simulator = "Nest"
@@ -171,79 +205,29 @@ if simulator!="Nest":
 
 if not language=="Python":
     print "Not written in Python."</code></pre>
-            <p>You can make loops with <code>for</code> or <code>while</code>.</p>
+        	<p>You can make loops with <code>for</code> or <code>while</code>.</p>
             <pre><code class="sourceCode python">j = 0
-for i in range(10):
+for i in range(10):  # range produces a list from 0 to arg - 1
     j += i
-    print i, j</code></pre>
+    print 'i={}, j={}'.format(i, j)</code></pre>
         </section>
 				<section>
-					<h1>Lists</h1>
-					<pre><code class="sourceCode python">a = range(6)              # a ==?
-3 in a                    # Test if it has a particular element.
-for x in a: print x**2,   # Loop around elements in the list.</code></pre>
-					<p>The elements can be accessed via indices:</p>
-					<pre><code class="sourceCode python">a[3]
-a[1:5]    # Access a range of elements.
-a[-1]     # You can also index from the end.</code></pre>
-					<p>Lists are mutable.</p>
-					<pre><code class="sourceCode python">a.append(6)     # You can append elements...
-a.append('J')   # of different types...
-a.remove(3)     # and remove them, too.</code></pre>
-				</section>
-				<section>
-					<h2 id="mutating-objects-and-python-oddities">Mutating objects and Python oddities</h2>
-					<p>Python <em>variables</em> are actually labels on the underlying data. This sometimes
-						leads to confusing behaviors. For example,</p>
-					<pre><code class="sourceCode python">b = a
-a.append(2)  # Now b == ???</code></pre>
-					<p>If this causes a problem, you need to use <strong>deep copying</strong>:</p>
-					<pre><code class="sourceCode python">import copy
-b = copy.deepcopy(a)
-a.append(3) # b==???</code></pre>
-				</section>
-				<section>
-					<h1>Tuples</h1>
-					<p>The tuple is similar to the list but is immutable.</p>
-					<pre><code class="sourceCode python">a = (1, 2)
-3 in a       # Test if it has the particular element.</code></pre>
-					<p>You can also access elements with indices:</p>
-					<pre><code class="sourceCode python">a = tuple(range(6))   # Cast a list into a tuple
-a[1:5]
-a[-1]     # You can also index from the end.</code></pre>
-				</section>
-				<section>
-					<p>Note in many cases the parenthese are not necessary to define a tuple. Try the
-						following examples and see what happens:</p>
-					<pre><code class="sourceCode python">a = 1, 2     # a == ???
-a, b = 1, 2  # a == ??? We have seen this before.</code></pre>
-					<p>The last expression can be conveniently used in many occasions:</p>
-					<pre><code class="sourceCode python">data = [('Purkinje', 'inhibitory'), ('Granule', 'excitatory')]
-for name, exc_inh in data:
-    print name, 'neurons are', exc_inh</code></pre>
-					<p>Also the tuple is useful when a function needs to return multiple values:</p>
-					<pre><code class="sourceCode python">def f():
-    return 1, 2
-
-x = f()     # x==???
-x, y = f()  # x==???</code></pre>
-				</section>
-				<section>
-					<h1>Dictionaries</h1>
-					<p>The dictionary is a convenient data structure providing key/value access.</p>
-					<pre><code class="sourceCode python">p = {'type': 'pyr', 'rate': 1.0, 'number': 1000}
-p['type']
-'type' in p    # Check if the dict has a particular **key**</code></pre>
-					<p>This is very useful if you have lots of data:</p>
-					<pre><code class="sourceCode python">cells = []
-cells.append({'type': 'pyr', 'rate': 1.0, 'number': 1000})
-cells.append({'type': 'inh_PV', 'rate': 10.0, 'number': 150})
-cells.append({'type': 'inh_SOM', 'rate': 1.0, 'number': 50})
-slow_cells = [c for c in cells if c['rate']&lt;5.0]  # List comprehension.
-for c in slow_cells:
-    print c['type']</code></pre>
-				</section>
-								
+					<h1>Indents</h1>
+					<p>Code blocks are defined by the fixed indents followed by '<strong>:</strong>'<br/> For
+						example, indent the codes in conditionals,</p>
+					<pre><code class="sourceCode python">if True:
+    print "True"
+    print "To be precise, that was True"
+else:
+    print "False"</code></pre>
+					<p>in loops,</p>
+					<pre><code class="sourceCode python">while alive:
+    print 'gambate!'</code></pre>
+					<p>or when you define functions</p>
+					<pre><code class="sourceCode python">def f(x):
+    y = x + 1
+    return y</code></pre>
+				</section>				
         <section>
             <h1>Functions</h1>
             <pre><code class="sourceCode python">def f(x, y):
@@ -266,26 +250,38 @@ f(**{'x': 1, 'y': 3})  # From a dictionary using '**'
         </section>
         <section>
             <h3 id="help-strings">Help strings</h3>
-            <pre><code class="sourceCode python">def f(x, y):
-   """ f(x, y) returns the sum of x and y."""
+            <pre><code class="sourceCode python">def func(x, y):
+   """ func(x, y) returns the sum of x and y."""
    return x+y</code></pre>
             <p>Then, try</p>
-            <pre><code class="sourceCode python">help(f)</code></pre>
+            <pre><code class="sourceCode python">help(func)</code></pre>
             <p>Try also other functions that we have seen such as</p>
             <pre><code class="sourceCode python">help(range)</code></pre>
             <p>and</p>
             <pre><code class="sourceCode python">help('in')</code></pre>
+        	<p>or in IPython</p>
+        	<pre><code class="sourceCode python">func?</code></pre>
         </section>
-        <section>
+		<section>
+			<h1>Returning tuples</h1>
+			<p>If you want to return multiple values us a tuple</p>
+			<pre><code class="sourceCode python">def integer_division(number, divisor):
+    divided = number // divisor
+    remainder = number % divisor
+    return divided, remainder  # you can drop the parenthesis</code></pre>
+			<p>Receiving tuples</p>
+			<pre><code class="sourceCode python">result = integer_division(15, 6)
+divided = result[0]
+remainder = result[1]</code></pre>
+Implicitly unpacking is more convenient
+<pre><code class="sourceCode python">divided, remainder = integer_division(15, 6)  # More convenient</code></pre>
+		</section>
+		<section>
             <h1>Modules</h1>
-            <p>In Python, every file is considered as a <em>module</em> with its own namespace. For
-                example, let's say you have <code>mymodule.py</code> as</p>
-            <pre><code class="sourceCode python">"""
-Here you write a module help. Try help(mymodule) after importing.
-"""
-
+            <p>In Python, every file is as a <em>module</em> with its own namespace.
+            	<p>For example, let's say you have <code>mymodule.py</code> as</p>
+            <pre><code class="sourceCode python">"""Here you write a module help. Try help(mymodule) after import."""
 def func1():
-    """ Help for func1. """
     print "You called func1!"</code></pre>
             <p>You can call <code>func1</code> as</p>
             <pre><code class="sourceCode python">import mymodule
@@ -296,50 +292,48 @@ m.func1()</code></pre>
             <p>or import the function directly first</p>
             <pre><code class="sourceCode python">from mymodule import func1
 func1()</code></pre>
-            <p>But use the following method <strong>only when you know what you are
-                doing!</strong></p>
-            <pre><code class="sourceCode python">from mymodule import *
-func1()</code></pre>
         </section>
         <section>
-            <p>A directory can be a module too if it has <code>__init__.py</code>. Typically, you
-                have:</p>
+            <p>A directory can be a module too if it has <code>__init__.py</code></p>
             <p><code>mymodule/__init__.py</code></p>
             <pre><code class="sourceCode python">"""
 Module help
 """
-
 import submodule1</code></pre>
             <p><code>mymodule/submodule1.py</code></p>
             <pre><code class="sourceCode python">"""
 Submodule help
 """
-
 def func1():...</code></pre>
             <p>Then, <code>func1</code> can be called as</p>
-            <pre><code class="sourceCode python">import mymodule
+            <pre><code class="sourceCode python">import mymodule.submodule1
 
 mymodule.submodule1.func1()</code></pre>
-            <p>Or you can use aliasing, too.</p>
         </section>
        
         <section>
             <h1>Classes and objects</h1>
             <p>The classes are defined as</p>
             <pre><code class="sourceCode python">class Cell(object):
-    """ Class help """
+    """A very simple cell model"""
     def __init__(self, cell_type):
         self.cell_type = cell_type
+        self._patch_clamps = []
         
     def add_patch_electrode(self, location):
-        raise NotImplementedError('This part is not implemented yet.')</code></pre>
+        self._patch_clamps.append(location)
+            
+    def list_patches(self):
+        return self.cell_type + ': ' + ', '.join(self._patch_clamps)</code></pre>
             <p>(Note <strong><code>self</code></strong> in the method definitions)</p>
-            <p>and you can make objects of the class as</p>
+            <p>and then you can make objects of the class as</p>
             <pre><code class="sourceCode python">c = Cell(cell_type='pyr')
 c.cell_type                    # Call attributes.
-c.add_patch_electrode('soma')  # Call methods.</code></pre>
+c.add_patch_electrode('soma')  # Call methods.
+c.add_patch_electrode('spiny_dendrite')
+print c.list_patches()</code></pre>
         </section>
-        <section>
+        <!--<section>
             <p>You can also subclass other classes as</p>
             <pre><code class="sourceCode python">class CellList(list):
     """ Need help """
@@ -353,8 +347,8 @@ c.add_patch_electrode('soma')  # Call methods.</code></pre>
         print "The number of cells is now", self.size</code></pre>
             <pre><code class="sourceCode python">l = CellList()
 l.append(c)</code></pre>
-        </section>
-        <section>
+        </section>-->
+        <!--<section>
             <h2 id="beware-when-you-need-to-create-many-many-custom-objects">Beware when you need to
                 create many many custom objects!</h2>
             <p>Python objects are dynamic, which makes them very easy to use, but are not optimzed
@@ -365,352 +359,37 @@ l.append(c)</code></pre>
                 <li>using <code>__slots__</code> (ask google if you want to know more)</li>
                 <li>subclassing <code>namedtuple</code> (again ask google)</li>
             </ul>
-        </section>
+        </section>-->
         <section>
-            <h1>Reading and writing files</h1>
-            <pre><code class="sourceCode python">f = open('example.dat', 'r+')   # open a file
-a = f.read()
-new_a = article.replace('butt', 'ass')
-f.write(new_a)
-f.close()                       # and close it.</code></pre>
-            <p><strong>Mode strings</strong></p>
+            <h1>Read/write to file</h1>
+            <pre><code class="sourceCode python">with open('example.dat', 'r+') as f: # open a file 'f'
+    a = f.read()
+    new_a = article.replace('butt', 'ass')
+    f.write(new_a)</code></pre>
+            <p><strong>Different 'mode' strings</strong></p>
             <ul>
-                <li>'r' : reading only</li>
+                <li>'r' (default): reading only</li>
                 <li>'w' : writing (an existing file will be erased)</li>
-                <li>'r+' : reading and writing</li>
-                <li>'a' : appending</li>
-                <li>Nothing: the same as 'r'</li>
+                <li>'r+' : read and writing</li>
             </ul>
-        </section>
-        <section>
-            <h3 id="pickling-objects">Pickling objects</h3>
-            <pre><code class="sourceCode python">import pickle
-x = {'cells': ['exc', 'inh']}
-f = open('temp.dat', 'w')
-pickle.dump(x, f)
-f.close()</code></pre>
-            <pre><code>f = open('temp.dat')
-x = pickle.load(f)
-f.close()</code></pre>
         </section>
         <section>
             <h1>Installing packages</h1>
-            <p>In <strong>most</strong> cases when you need to install a Python package,
-                    <code>pip</code> is your friend. Download the setup file for
-                    <code>distribute</code> and <code>pip</code> from</p>
-            <ul>
-                <li><a href="http://python-distribute.org/distribute_setup.py"
-                        >http://python-distribute.org/distribute_setup.py</a></li>
-                <li><a href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py"
-                        >https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a></li>
-            </ul>
-            <p>and run</p>
-            <pre class="sourceCode bash"><code class="sourceCode bash">$ python distribute_setup.py
-$ python get-pip.py</code></pre>
-            <p>Then try</p>
-            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install virtualenv</code></pre>
-            <p>which will install a package <code>virtualenv</code>.</p>
+            <p>In <strong>most</strong> cases when you need to install a Python package, use <code>pip</code>...
+            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install sympy</code></pre>
+            <p>which will install the <code>sympy</code> package, or</p>
+            <pre class="sourceCode bash"><code class="sourceCode bash">$ pip install neo</code></pre>
+            <p>which will install the <code>neo</code> package.</p>
         </section>
         <section>
-            <h1>For more information</h1>
+            <h1>More information</h1>
             <ul>
                 <li>python_tutorial.pdf</li>
+                <li>idiomatic_python.pdf</li>
                 <li><a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html"
                             ><strong>Code like a Pythonista</strong></a></li>
             </ul>
         </section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
 
 			</div>
 
